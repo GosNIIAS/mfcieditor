@@ -14,7 +14,6 @@ type
 
   TFMain = class(TForm)
     AFileCreate: TAction;
-    AReportAdd: TAction;
     AReportCreate: TAction;
     AHierarchyUp: TAction;
     AHierarchyDown: TAction;
@@ -49,6 +48,7 @@ type
     MenuItem22: TMenuItem;
     MenuItem23: TMenuItem;
     MenuItem24: TMenuItem;
+    MenuItem25: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
     MenuItem5: TMenuItem;
