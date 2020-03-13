@@ -5,68 +5,355 @@ unit HumanIntClasses;
 interface
 
 uses
-  Classes, SysUtils, Graphics;
+  Classes, SysUtils, Graphics, Controls, BaseInterface, fgl;
 
 type
-  TFormat = class   //Класс форматов
-   private
-    Descript: string;        //Определение микрозадачи для кадров
-    Purpose: string;         //Описание макрозадачи формата
-    Mode: string;            //Режим полета или работы
-    //ScrStuct: TBitmap; //-рисунок?(Graphics)//Кадровая структура формата
+  TFormat=class;
+  TFormatList = specialize TFPGObjectList<TFormat>;
+
+  { TIntefaceElements }
+
+  TIntefaceElements = class(TmfciInterface)
+  private
+    FFormats: TFormatList;
+    procedure SetFormats(AValue: TFormatList);
    public
-    constructor Create(NDescript, NPurpose, NMode: string);
+    property Formats: TFormatList read FFormats write SetFormats;
+  end;
+
+
+  { TFormat }
+
+  TFormat = class(TmfciInterface)   //Класс форматов
+
+  private
+    FDescript: string;
+    FMode: string;
+    FPurpose: string;
+    FScrStuct: TImageList;
+    function GetMode: string;
+    function GetPurpose: string;
+    function GetScrStuct: TImageList;
+    procedure SetDescript(AValue: string);
+    procedure SetMode(AValue: string);
+    procedure SetPurpose(AValue: string);
+    procedure SetScrStuct(AValue: TImageList);
+   published
+    //Определение микрозадачи для кадров
+    property Descript: string read FDescript write SetDescript;
+    //Описание макрозадачи формата
+    property Purpose: string read FPurpose write SetPurpose;
+    //Режим полета или работы
+    property Mode: string read FMode write SetMode;
+    //Кадровая структура формата (рисунок - png!)
+    property ScrStuct: TImageList read FScrStuct write SetScrStuct;
 
   end;
 
-  TScreen = class   //Класс кадров
+
+
+  { TScreen }
+
+  TScreen = class(TmfciInterface)  //Класс кадров
    private
-    Descript: string;      //Обозначение, соответствующее задаче кадра
-    Purpose: string;       //Задачи, для которых предназначен кадр
-    //Appearance - набор рисунков? Изображение кадра с номерами эл-тов
-    //ScZone -  //Компановочный план
-   public
+     FAppearance: TImageList;
+     FDescript: string;
+     FPurpose: string;
+     FScZone: TPicture;
+     function GetAppearance: TImageList;
+     function GetDescript: string;
+     function GetPurpose: string;
+     procedure SetAppearance(AValue: TImageList);
+     procedure SetDescript(AValue: string);
+     procedure SetPurpose(AValue: string);
+     procedure SetScZone(AValue: TPicture);
+
+   published
+    //Обозначение, соответствующее задаче кадра
+    property Descript: string read FDescript write SetDescript;
+    //Задачи, для которых предназначен кадр
+    property Purpose: string read FPurpose write SetPurpose;
+    //Изображение кадра с номерами эл-тов
+    property Appearance: TImageList read FAppearance write SetAppearance;
+    property ScZone: TPicture read FScZone write SetScZone;
 
   end;
 
-  TZone = class    //Класс зон в кадре
-   private
-    Descript: string;   //Cостав зоны и ее номер в кадре
-    Purpose: string;    //Назначение отображаемой в зоне информации
-   public
+  { TZone }
 
+  TZone = class(TmfciInterface)   //Класс зон в кадре
+   private
+     FDescript: string;
+     FPurpose: string;
+     procedure SetDescript(AValue: string);
+     procedure SetPurpose(AValue: string);
+       //Cостав зоны и ее номер в кадре
+        //Назначение отображаемой в зоне информации
+   published
+    property Descript: string read FDescript write SetDescript;
+    property Purpose: string read FPurpose write SetPurpose;
    end;
 
-  TGraphElem = class  //Класс графических элементов
-   private
-    PosNumber: Integer; //Номер граф.элемента в кадре
-    Name: string;       //Название графического элемента
-    //GraghType:Integer; // Тип граф.элеметна Текст,Счетчик,Граф.Символ?
-    GraghAmout: Integer;     //Кол-во вариантов отображения граф.элемента
+  { TGraphElem }
 
-   public
+  TGraphElem = class(TmfciInterface)  //Класс графических элементов
+
+  private
+    FGraghAmout: Integer;
+    FGraghType: Integer;
+    FName: string;
+    FPosNumber: Integer;
+    procedure SetGraghAmout(AValue: Integer);
+    procedure SetGraghType(AValue: Integer);
+    procedure SetName(AValue: string);
+    procedure SetPosNumber(AValue: Integer);
+   published
+    //Номер граф.элемента в кадре
+    property PosNumber: Integer read FPosNumber write SetPosNumber;
+    //Название графического элемента
+    property Name: string read FName write SetName;
+    property GraghType:Integer read FGraghType write SetGraghType;
+    property GraghAmout: Integer read FGraghAmout write SetGraghAmout;
 
   end;
 
-  TDispView = class
-   private
-    Name: string;
-    Purpose: string;
-    //Appearance: TBitmap;
-    //FormationAlg:алгоритм?
-    //DispConditions:алгоритм
-    //Mode:  string; 1 или несколько режимов
-    Color: string;
-    PhysRage: string;
-    MetrRage: string;
-    Notation: string;
-    //KeyWords: string;
-   public
+  { TDispView }
+
+  TDispView = class(TmfciInterface)
+  private
+    FAppearance: TPicture;
+    FColor: string;
+    FDispConditions: string;
+    FFormationAlg: string;
+    FKeyWords: string;
+    FMetrRage: string;
+    FMode: string;
+    FName: string;
+    FNotation: string;
+    FPhysRage: string;
+    FPurpose: string;
+    procedure SetAppearance(AValue: TPicture);
+    procedure SetColor(AValue: string);
+    procedure SetDispConditions(AValue: string);
+    procedure SetFormationAlg(AValue: string);
+    procedure SetKeyWords(AValue: string);
+    procedure SetMetrRage(AValue: string);
+    procedure SetMode(AValue: string);
+    procedure SetName(AValue: string);
+    procedure SetNotation(AValue: string);
+    procedure SetPhysRage(AValue: string);
+    procedure SetPurpose(AValue: string);
+   published
+    property Name: string read FName write SetName;
+    property Purpose: string read FPurpose write SetPurpose;
+    property Appearance: TPicture read FAppearance write SetAppearance;
+    property FormationAlg:string read FFormationAlg write SetFormationAlg;
+    property DispConditions:string read FDispConditions write SetDispConditions;
+    property Mode:  string read FMode write SetMode; //1 или несколько режимов
+    property Color: string read FColor write SetColor;
+    property PhysRage: string read FPhysRage write SetPhysRage;
+    property MetrRage: string read FMetrRage write SetMetrRage;
+    property Notation: string read FNotation write SetNotation;
+    property KeyWords: string read FKeyWords write SetKeyWords;
+   published
+
   end;
 
 
 
 implementation
+
+{ TDispView }
+
+procedure TDispView.SetAppearance(AValue: TPicture);
+begin
+  if FAppearance=AValue then Exit;
+  FAppearance:=AValue;
+end;
+
+procedure TDispView.SetColor(AValue: string);
+begin
+  if FColor=AValue then Exit;
+  FColor:=AValue;
+end;
+
+procedure TDispView.SetDispConditions(AValue: string);
+begin
+  if FDispConditions=AValue then Exit;
+  FDispConditions:=AValue;
+end;
+
+procedure TDispView.SetFormationAlg(AValue: string);
+begin
+  if FFormationAlg=AValue then Exit;
+  FFormationAlg:=AValue;
+end;
+
+procedure TDispView.SetKeyWords(AValue: string);
+begin
+  if FKeyWords=AValue then Exit;
+  FKeyWords:=AValue;
+end;
+
+procedure TDispView.SetMetrRage(AValue: string);
+begin
+  if FMetrRage=AValue then Exit;
+  FMetrRage:=AValue;
+end;
+
+procedure TDispView.SetMode(AValue: string);
+begin
+  if FMode=AValue then Exit;
+  FMode:=AValue;
+end;
+
+procedure TDispView.SetName(AValue: string);
+begin
+  if FName=AValue then Exit;
+  FName:=AValue;
+end;
+
+procedure TDispView.SetNotation(AValue: string);
+begin
+  if FNotation=AValue then Exit;
+  FNotation:=AValue;
+end;
+
+procedure TDispView.SetPhysRage(AValue: string);
+begin
+  if FPhysRage=AValue then Exit;
+  FPhysRage:=AValue;
+end;
+
+procedure TDispView.SetPurpose(AValue: string);
+begin
+  if FPurpose=AValue then Exit;
+  FPurpose:=AValue;
+end;
+
+{ TIntefaceElements }
+
+procedure TIntefaceElements.SetFormats(AValue: TFormatList);
+begin
+  //if FFormats=AValue then Exit;
+  FFormats:=AValue;
+end;
+
+{ TGraphElem }
+
+procedure TGraphElem.SetGraghAmout(AValue: Integer);
+begin
+  if FGraghAmout=AValue then Exit;
+  FGraghAmout:=AValue;
+end;
+
+procedure TGraphElem.SetGraghType(AValue: Integer);
+begin
+  if FGraghType=AValue then Exit;
+  FGraghType:=AValue;
+end;
+
+procedure TGraphElem.SetName(AValue: string);
+begin
+  if FName=AValue then Exit;
+  FName:=AValue;
+end;
+
+procedure TGraphElem.SetPosNumber(AValue: Integer);
+begin
+  if FPosNumber=AValue then Exit;
+  FPosNumber:=AValue;
+end;
+
+{ TZone }
+
+procedure TZone.SetDescript(AValue: string);
+begin
+  if FDescript=AValue then Exit;
+  FDescript:=AValue;
+end;
+
+procedure TZone.SetPurpose(AValue: string);
+begin
+  if FPurpose=AValue then Exit;
+  FPurpose:=AValue;
+end;
+
+{ TFormat }
+
+function TFormat.GetMode: string;
+begin
+
+end;
+
+function TFormat.GetPurpose: string;
+begin
+
+end;
+
+function TFormat.GetScrStuct: TImageList;
+begin
+
+end;
+
+procedure TFormat.SetDescript(AValue: string);
+begin
+  if FDescript=AValue then Exit;
+  FDescript:=AValue;
+end;
+
+procedure TFormat.SetMode(AValue: string);
+begin
+
+end;
+
+procedure TFormat.SetPurpose(AValue: string);
+begin
+
+end;
+
+procedure TFormat.SetScrStuct(AValue: TImageList);
+begin
+
+end;
+
+{ TScreen }
+
+function TScreen.GetAppearance: TImageList;
+begin
+
+end;
+
+function TScreen.GetDescript: string;
+begin
+
+end;
+
+function TScreen.GetPurpose: string;
+begin
+
+end;
+
+procedure TScreen.SetAppearance(AValue: TImageList);
+begin
+
+end;
+
+procedure TScreen.SetDescript(AValue: string);
+begin
+
+end;
+
+procedure TScreen.SetPurpose(AValue: string);
+begin
+
+end;
+
+procedure TScreen.SetScZone(AValue: TPicture);
+begin
+  if FScZone=AValue then Exit;
+  FScZone:=AValue;
+end;
 
 end.
 
