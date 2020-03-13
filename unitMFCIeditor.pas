@@ -1,4 +1,4 @@
-unit UMain;
+unit unitMFCIeditor;
 
 {$mode objfpc}{$H+}
 

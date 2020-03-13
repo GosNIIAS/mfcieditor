@@ -1,7 +1,7 @@
 object FMain: TFMain
-  Left = 380
+  Left = 1208
   Height = 523
-  Top = 262
+  Top = 14
   Width = 699
   Caption = 'FormMain'
   ClientHeight = 503
