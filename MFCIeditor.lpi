@@ -34,19 +34,24 @@
         <PackageName Value="LCL"/>
       </Item2>
     </RequiredPackages>
-    <Units Count="2">
+    <Units Count="3">
       <Unit0>
         <Filename Value="MFCIeditor.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="..\mfcieditor\umain.pas"/>
+        <Filename Value="umain.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="FMain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UMain"/>
       </Unit1>
+      <Unit2>
+        <Filename Value="machineinterface.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MachineInterface"/>
+      </Unit2>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
