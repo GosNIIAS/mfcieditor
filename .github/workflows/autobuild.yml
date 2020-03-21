@@ -20,10 +20,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     #Install lazarus & FPC
-    - name: Install lazarus
-      run: sudo apt install lazarus -y
+    #- name: Install lazarus
+    #  run: sudo apt install lazarus -y
 
     # Runs a single command using the runners shell
     - name: Build
       run: 
+        cat ./MakeFile
         make --file=./Makefile
