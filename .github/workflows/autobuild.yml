@@ -27,4 +27,4 @@ jobs:
     - name: Build
       run: 
         cat ./MakeFile
-        make --file=./Makefile
+        #make --file=./Makefile
