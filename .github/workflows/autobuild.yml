@@ -21,7 +21,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-      name: Install lazarus
+    - name: Install lazarus
       run: apt install lazarus -y
 
     # Runs a single command using the runners shell
