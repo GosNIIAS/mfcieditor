@@ -21,11 +21,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     #Install lazarus & FPC
-    #- name: Install lazarus
-    #  run: sudo apt install lazarus -y
+    - name: Install lazarus
+      run: sudo apt install lazarus -y
 
     # Runs a single command using the runners shell
     - name: Build
       run: 
-        cat ./Makefile
-        #make --file=./Makefile
+        make
