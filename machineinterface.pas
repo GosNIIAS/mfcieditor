@@ -9,29 +9,29 @@ uses
 
 type
 
-  { System }
+  { TSystem }
 
-  System = class
+  TSystem = class
   private
     FSysName: string;
     procedure SetSysName(AValue: string);
     published
-      property SysName: string read FSysName write SetSysName;
+    property SysName: string read FSysName write SetSysName;//Наименование системы, которая генерирует параметр
   end;
 
-  { GroupParameter }
+  { TGroupParameter }
 
-  GroupParameter = class
+  TGroupParameter = class
   private
     FGroupName: string;
     procedure SetGroupName(AValue: string);
        published
-         property GroupName: string read FGroupName write SetGroupName;
+         property GroupName: string read FGroupName write SetGroupName;//Наименование группы параметров, раскрывающее её физич.смысk
   end;
 
-  { Parameter }
+  { TParameter }
 
-  Parameter = class
+  TParameter = class
   private
     FElementDecoding: string;
     FIdentifier_ENG: string;
@@ -50,80 +50,80 @@ type
     procedure SetRange(AValue: string);
     procedure SetUnits(AValue: string);
     published
-      property ParamName: string read FParamName write SetParamName;
-      property Identifier_RUS: string read FIdentifier_RUS write SetIdentifier_RUS;
-      property Identifier_ENG: string read FIdentifier_ENG write SetIdentifier_ENG;
-      property Units: string read FUnits write SetUnits;
-      property Range: string read FRange write SetRange;
-      property Precision: extended read FPrecision write SetPrecision;
-      property ElementDecoding: string read FElementDecoding write SetElementDecoding;
-      property ParamDecoding: string read FParamDecoding write SetParamDecoding;
+      property ParamName: string read FParamName write SetParamName;//Наименование параметра, раскрывающее её физич.смысл
+      property Identifier_RUS: string read FIdentifier_RUS write SetIdentifier_RUS;//Оригинальный идентификатор(код параметра) русскими буквами
+      property Identifier_ENG: string read FIdentifier_ENG write SetIdentifier_ENG;//Оригинальный идентификатор(код параметра)транслитерацией
+      property Units: string read FUnits write SetUnits; //Единицы измерения
+      property Range: string read FRange write SetRange;//Диапазон в котором параметр передаётся от системы
+      property Precision: extended read FPrecision write SetPrecision;//Точность, с которой параметр передаётся от системы
+      property ElementDecoding: string read FElementDecoding write SetElementDecoding;//Расшифровка значений элементов массива
+      property ParamDecoding: string read FParamDecoding write SetParamDecoding;//Расшифровка значений для параметров
   end;
 
 
 implementation
 
-{ Parameter }
+{ TParameter }
 
-procedure Parameter.SetParamName(AValue: string);
+procedure TParameter.SetParamName(AValue: string);
 begin
   if FParamName=AValue then Exit;
   FParamName:=AValue;
 end;
 
-procedure Parameter.SetPrecision(AValue: extended);
+procedure TParameter.SetPrecision(AValue: extended);
 begin
   if FPrecision=AValue then Exit;
   FPrecision:=AValue;
 end;
 
-procedure Parameter.SetRange(AValue: string);
+procedure TParameter.SetRange(AValue: string);
 begin
   if FRange=AValue then Exit;
   FRange:=AValue;
 end;
 
-procedure Parameter.SetUnits(AValue: string);
+procedure TParameter.SetUnits(AValue: string);
 begin
   if FUnits=AValue then Exit;
   FUnits:=AValue;
 end;
 
-procedure Parameter.SetIdentifier_RUS(AValue: string);
+procedure TParameter.SetIdentifier_RUS(AValue: string);
 begin
   if FIdentifier_RUS=AValue then Exit;
   FIdentifier_RUS:=AValue;
 end;
 
-procedure Parameter.SetParamDecoding(AValue: string);
+procedure TParameter.SetParamDecoding(AValue: string);
 begin
   if FParamDecoding=AValue then Exit;
   FParamDecoding:=AValue;
 end;
 
-procedure Parameter.SetIdentifier_ENG(AValue: string);
+procedure TParameter.SetIdentifier_ENG(AValue: string);
 begin
   if FIdentifier_ENG=AValue then Exit;
   FIdentifier_ENG:=AValue;
 end;
 
-procedure Parameter.SetElementDecoding(AValue: string);
+procedure TParameter.SetElementDecoding(AValue: string);
 begin
   if FElementDecoding=AValue then Exit;
   FElementDecoding:=AValue;
 end;
 
-{ GroupParameter }
+{ TGroupParameter }
 
-procedure GroupParameter.SetGroupName(AValue: string);
+procedure TGroupParameter.SetGroupName(AValue: string);
 begin
   if FGroupName=AValue then Exit;
   FGroupName:=AValue;
 end;
 
-{ System }
+{ TSystem }
 
-procedure System.SetSysName(AValue: string);
+procedure TSystem.SetSysName(AValue: string);
 begin
   if FSysName=AValue then Exit;
   FSysName:=AValue;

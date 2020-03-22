@@ -75,6 +75,7 @@ type
     property Purpose: string read FPurpose write SetPurpose;
     //Изображение кадра с номерами эл-тов
     property Appearance: TImageList read FAppearance write SetAppearance;
+    //Зонирование кадра(деление на зоны и их обозначение)
     property ScZone: TPicture read FScZone write SetScZone;
 
   end;
@@ -87,10 +88,10 @@ type
      FPurpose: string;
      procedure SetDescript(AValue: string);
      procedure SetPurpose(AValue: string);
-       //Cостав зоны и ее номер в кадре
-        //Назначение отображаемой в зоне информации
    published
+    //Состав зоны и её номер в кадре
     property Descript: string read FDescript write SetDescript;
+    //Назначение отображаемой в зоне информации
     property Purpose: string read FPurpose write SetPurpose;
    end;
 
@@ -112,7 +113,9 @@ type
     property PosNumber: Integer read FPosNumber write SetPosNumber;
     //Название графического элемента
     property Name: string read FName write SetName;
+    //Тип графического элемента
     property GraghType:Integer read FGraghType write SetGraghType;
+    //Количество возможных вариантов отображения граф.элемента
     property GraghAmout: Integer read FGraghAmout write SetGraghAmout;
 
   end;
@@ -144,16 +147,27 @@ type
     procedure SetPhysRage(AValue: string);
     procedure SetPurpose(AValue: string);
    published
+    //Наименование вида отображения
     property Name: string read FName write SetName;
+    //Описание физ.смысла данного вида отображения граф.элемента
     property Purpose: string read FPurpose write SetPurpose;
+    //Внешний вид индицируемого символа в данном варианте
     property Appearance: TPicture read FAppearance write SetAppearance;
+    //Алгоритм формирования внешнего вида граф.элем.в данном варианте
     property FormationAlg:string read FFormationAlg write SetFormationAlg;
+    //Условия индикации граф.эл. в данном варианте отображения
     property DispConditions:string read FDispConditions write SetDispConditions;
+    //Режимы, в которых данный символ может отображаться всегда или про доп.условиях
     property Mode:  string read FMode write SetMode; //1 или несколько режимов
+    //Цвета, которыми отображается граф.элемент
     property Color: string read FColor write SetColor;
+    //Диапазон изменения(физический)
     property PhysRage: string read FPhysRage write SetPhysRage;
+    //Диапазон изменения(метрический)
     property MetrRage: string read FMetrRage write SetMetrRage;
+    //Примечание к алгоритму
     property Notation: string read FNotation write SetNotation;
+    //Ключевые слова
     property KeyWords: string read FKeyWords write SetKeyWords;
    published
 
@@ -235,7 +249,7 @@ end;
 
 procedure TIntefaceElements.SetFormats(AValue: TFormatList);
 begin
-  //if FFormats=AValue then Exit;
+ if FFormats=AValue then Exit;
   FFormats:=AValue;
 end;
 
@@ -304,17 +318,20 @@ end;
 
 procedure TFormat.SetMode(AValue: string);
 begin
-
+  if FMode=AValue then Exit;
+  FMode:=AValue;
 end;
 
 procedure TFormat.SetPurpose(AValue: string);
 begin
-
+  if FPurpose=AValue then Exit;
+  FPurpose:=AValue;
 end;
 
 procedure TFormat.SetScrStuct(AValue: TImageList);
 begin
-
+  if FScrStuct=AValue then Exit;
+  FScrStuct:=AValue;
 end;
 
 { TScreen }
@@ -336,17 +353,20 @@ end;
 
 procedure TScreen.SetAppearance(AValue: TImageList);
 begin
-
+  if FAppearance=AValue then Exit;
+  FAppearance:=AValue;
 end;
 
 procedure TScreen.SetDescript(AValue: string);
 begin
-
+  if FDescript=AValue then Exit;
+  FDescript:=AValue;
 end;
 
 procedure TScreen.SetPurpose(AValue: string);
 begin
-
+  if FPurpose=AValue then Exit;
+  FPurpose:=AValue;
 end;
 
 procedure TScreen.SetScZone(AValue: TPicture);
