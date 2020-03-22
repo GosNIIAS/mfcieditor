@@ -28,3 +28,7 @@ jobs:
     - name: Build
       run: 
         make
+        
+    - uses: actions/download-artifact@v1
+      with:
+        name: MFCIeditor
