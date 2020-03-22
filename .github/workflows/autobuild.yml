@@ -26,6 +26,8 @@ jobs:
     #  run: 
     #    make
         
-    - uses: actions/download-artifact@v1
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
       with:
+        # Artifact name
         name: Makefile
