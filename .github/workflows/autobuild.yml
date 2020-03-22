@@ -18,14 +18,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     #Install lazarus & FPC
-    - name: Install lazarus
-      run: sudo apt update && sudo apt install lazarus -y
+    #- name: Install lazarus
+    #  run: sudo apt update && sudo apt install lazarus -y
 
     # Runs a single command using the runners shell
-    - name: Build
-      run: 
-        make
+    #- name: Build
+    #  run: 
+    #    make
         
     - uses: actions/download-artifact@v1
       with:
-        name: ./MFCIeditor
+        name: ./Makefile
